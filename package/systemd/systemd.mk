@@ -32,7 +32,6 @@ SYSTEMD_CONF_OPTS += \
 	--enable-static=no \
 	--disable-manpages \
 	--disable-selinux \
-	--disable-pam \
 	--disable-libcryptsetup \
 	--with-dbuspolicydir=/etc/dbus-1/system.d \
 	--with-dbussessionservicedir=/usr/share/dbus-1/services \
@@ -75,6 +74,13 @@ SYSTEMD_CONF_OPTS += --enable-seccomp
 SYSTEMD_DEPENDENCIES += libseccomp
 else
 SYSTEMD_CONF_OPTS += --disable-seccomp
+endif
+
+ifeq ($(BR2_PACKAGE_LINUX_PAM),y)
+SYSTEMD_CONF_OPTS += --enable-pam
+SYSTEMD_DEPENDENCIES += linux-pam
+else
+SYSTEMD_CONF_OPTS += --disable-pam
 endif
 
 ifeq ($(BR2_PACKAGE_SYSTEMD_ALL_EXTRAS),y)
