@@ -103,6 +103,12 @@ define SYSTEMD_INSTALL_RESOLVCONF_HOOK
 	ln -sf ../run/systemd/resolve/resolv.conf \
 		$(TARGET_DIR)/etc/resolv.conf
 endef
+define SYSTEMD_INSTALL_SERVICE_NETWORK
+	$(INSTALL) -D -m 644 package/systemd/ethernet.network \
+		$(TARGET_DIR)/etc/systemd/network/ethernet.network
+	$(INSTALL) -D -m 644 package/systemd/virtual-ethernet.network \
+		$(TARGET_DIR)/etc/systemd/network/virtual-ethernet.network
+endef
 else
 SYSTEMD_CONF_OPTS += --disable-networkd
 define SYSTEMD_INSTALL_SERVICE_NETWORK
