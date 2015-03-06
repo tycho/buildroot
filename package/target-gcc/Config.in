@@ -1,0 +1,11 @@
+config BR2_PACKAGE_TARGET_GCC
+    bool "gcc"
+	select BR2_PACKAGE_BINUTILS
+	select BR2_PACKAGE_BINUTILS_TARGET
+	select BR2_PACKAGE_CLOOG
+	select BR2_PACKAGE_ISL
+	select BR2_PACKAGE_GMP
+	select BR2_PACKAGE_MPC
+	select BR2_PACKAGE_MPFR
+	help
+	  Package gcc for the target

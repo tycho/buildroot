@@ -114,10 +114,12 @@ ifeq ($(BR2_PACKAGE_GDB),y)
 GLIBC_LIBS_LIB += libthread_db.so.*
 endif
 
+ifneq ($(BR2_PACKAGE_TARGET_GCC),y)
 define GLIBC_INSTALL_TARGET_CMDS
 	for libs in $(GLIBC_LIBS_LIB); do \
 		$(call copy_toolchain_lib_root,$(STAGING_DIR)/,,lib,$$libs,/lib) ; \
 	done
 endef
+endif
 
 $(eval $(autotools-package))
