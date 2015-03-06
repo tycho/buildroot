@@ -12,5 +12,9 @@ GMP_LICENSE = LGPLv3+
 GMP_LICENSE_FILES = COPYING.LESSERv3
 GMP_DEPENDENCIES = host-m4
 
+ifeq ($(BR2_X32_ABI),y)
+GMP_CONF_OPTS += ABI="x32"
+endif
+
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))
