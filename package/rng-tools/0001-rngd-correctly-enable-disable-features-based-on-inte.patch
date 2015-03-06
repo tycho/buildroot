@@ -1,0 +1,35 @@
+From efa09678a9ce3372fa8812b10e62a9207b8914b5 Mon Sep 17 00:00:00 2001
+From: Steven Noonan <steven@uplinklabs.net>
+Date: Wed, 23 Oct 2013 03:26:08 -0700
+Subject: [PATCH 1/2] rngd: correctly enable/disable features based on integer
+ arguments
+
+Signed-off-by: Steven Noonan <steven@uplinklabs.net>
+---
+ rngd.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/rngd.c b/rngd.c
+index 0205d40..d6cb67f 100644
+--- a/rngd.c
++++ b/rngd.c
+@@ -184,7 +184,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
+		if ((sscanf(arg,"%i", &n) == 0) || ((n | 1)!=1))
+			argp_usage(state);
+		else
+-			arguments->enable_drng = false;
++			arguments->enable_drng = (n == 0);
+		break;
+	}
+	case 'n': {
+@@ -192,7 +192,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
+		if ((sscanf(arg,"%i", &n) == 0) || ((n | 1)!=1))
+			argp_usage(state);
+		else
+-			arguments->enable_tpm = false;
++			arguments->enable_tpm = (n == 0);
+		break;
+	}
+
+--
+1.9.3
