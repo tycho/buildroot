@@ -47,4 +47,15 @@ define OPENSSH_INSTALL_INIT_SYSV
 		$(TARGET_DIR)/etc/init.d/S50sshd
 endef
 
+ifeq ($(BR2_PACKAGE_LINUX_PAM),y)
+define OPENSSH_PACKAGE_PATCH_SSHD_CONFIG
+	sed \
+		-e '/^#ChallengeResponseAuthentication yes$$/c ChallengeResponseAuthentication no' \
+		-e '/^#PrintMotd yes$$/c PrintMotd no # pam does that' \
+		-e '/^#UsePAM no$$/c UsePAM yes' \
+		-i $(TARGET_DIR)/etc/ssh/sshd_config
+endef
+OPENSSH_PACKAGE_POST_INSTALL_TARGET_HOOKS += OPENSSH_PACKAGE_PATCH_SSHD_CONFIG
+endif
+
 $(eval $(autotools-package))
