@@ -9,6 +9,7 @@ OPENSSH_SITE = http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable
 OPENSSH_LICENSE = BSD-3c BSD-2c Public Domain
 OPENSSH_LICENSE_FILES = LICENCE
 OPENSSH_CONF_ENV = LD="$(TARGET_CC)" LDFLAGS="$(TARGET_CFLAGS)"
+OPENSSH_AUTORECONF = YES
 OPENSSH_CONF_OPTS = \
 	--sysconfdir=/etc/ssh \
 	--disable-lastlog \
@@ -25,6 +26,11 @@ endef
 # uClibc toolchain for ARC doesn't support PIE at the moment
 ifeq ($(BR2_arc),y)
 OPENSSH_CONF_OPTS += --without-pie
+endif
+
+ifeq ($(BR2_X32_ABI),y)
+OPENSSH_DEPENDENCIES = libseccomp
+OPENSSH_CONF_OPTS += --with-sandbox=libseccomp_filter
 endif
 
 OPENSSH_DEPENDENCIES = zlib openssl
