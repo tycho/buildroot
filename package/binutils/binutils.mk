@@ -65,6 +65,11 @@ BINUTILS_CONF_OPTS += \
 	--enable-ld=$(ENABLE_LD)
 endif
 
+ifeq ($(BR2_PACKAGE_BINUTILS_LD_GOLD_THREADS),y)
+BINUTILS_CONF_OPTS += \
+	--enable-threads
+endif
+
 # Don't build documentation. It takes up extra space / build time,
 # and sometimes needs specific makeinfo versions to work
 BINUTILS_CONF_ENV += ac_cv_prog_MAKEINFO=missing

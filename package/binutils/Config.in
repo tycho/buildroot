@@ -26,6 +26,11 @@ config BR2_PACKAGE_BINUTILS_LD_GOLD
 
 if BR2_PACKAGE_BINUTILS_LD_GOLD
 
+config BR2_PACKAGE_BINUTILS_LD_GOLD_THREADS
+	bool "enable multithreaded ld.gold"
+	help
+	  Enables multithreading in ld.gold
+
 config BR2_PACKAGE_BINUTILS_LD_GOLD_DEFAULT
 	bool "make gold linker the default"
 	help
