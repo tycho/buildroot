@@ -220,6 +220,11 @@ config BR2_GNU_MIRROR
 
 endif
 
+config BR2_GCC_MIRROR
+	string
+	default BR2_GNU_MIRROR if !BR2_GCC_STABLE_SNAPSHOT
+	default "http://mirrors.concertpass.com"
+
 config BR2_LUAROCKS_MIRROR
 	string "LuaRocks mirror"
 	default "http://rocks.moonscript.org"
