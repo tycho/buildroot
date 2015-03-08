@@ -51,6 +51,20 @@ BINUTILS_CONF_OPTS = \
 	$(BINUTILS_DISABLE_GDB_CONF_OPTS) \
 	$(BINUTILS_EXTRA_CONFIG_OPTIONS)
 
+ifeq ($(BR2_PACKAGE_BINUTILS_LD_GOLD_DEFAULT),y)
+ENABLE_GOLD = default
+ENABLE_LD = yes
+else
+ENABLE_GOLD = yes
+ENABLE_LD = default
+endif
+
+ifeq ($(BR2_PACKAGE_BINUTILS_LD_GOLD),y)
+BINUTILS_CONF_OPTS += \
+	--enable-gold=$(ENABLE_GOLD) \
+	--enable-ld=$(ENABLE_LD)
+endif
+
 # Don't build documentation. It takes up extra space / build time,
 # and sometimes needs specific makeinfo versions to work
 BINUTILS_CONF_ENV += ac_cv_prog_MAKEINFO=missing
