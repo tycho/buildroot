@@ -34,6 +34,10 @@ ifeq ($(BR2_arc),y)
 PERF_MAKE_FLAGS += NO_BACKTRACE=1
 endif
 
+ifeq ($(BR2_PACKAGE_LIBUNWIND),y)
+	PERF_DEPENDENCIES += libunwind
+endif
+
 ifeq ($(BR2_PACKAGE_NUMACTL),y)
 	PERF_DEPENDENCIES += numactl
 endif
