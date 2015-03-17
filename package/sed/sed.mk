@@ -19,10 +19,12 @@ SED_CONF_OPTS = \
 	--infodir=/usr/share/info \
 	--include=$(STAGING_DIR)/usr/include
 
+ifneq ($(BR2_ROOTFS_SKELETON_UNIFIED_BIN),y)
 define SED_MOVE_BINARY
 	mv $(TARGET_DIR)/usr/bin/sed $(TARGET_DIR)/bin/
 endef
 
 SED_POST_INSTALL_TARGET_HOOKS = SED_MOVE_BINARY
+endif
 
 $(eval $(autotools-package))

@@ -159,6 +159,11 @@ config BR2_ROOTFS_SKELETON_DEFAULT
 	help
 	  Use default target skeleton
 
+config BR2_ROOTFS_SKELETON_UNIFIED_BIN
+	bool "unified bin skeleton"
+	help
+	  Use unified /bin:/sbin:/usr/bin:/usr/sbin skeleton
+
 config BR2_ROOTFS_SKELETON_CUSTOM
 	bool "custom target skeleton"
 	help
@@ -174,7 +179,7 @@ config BR2_ROOTFS_SKELETON_CUSTOM_PATH
 	  Path to custom target skeleton.
 endif
 
-if BR2_ROOTFS_SKELETON_DEFAULT
+if BR2_ROOTFS_SKELETON_DEFAULT || BR2_ROOTFS_SKELETON_UNIFIED_BIN
 
 config BR2_TARGET_GENERIC_ROOT_PASSWD
 	string "Root password"
