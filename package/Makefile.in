@@ -69,6 +69,10 @@ ABI := $(ABI)hf
 endif
 endif
 
+ifeq ($(BR2_X32_ABI),y)
+ABI = x32
+endif
+
 # For FSL PowerPC there's SPE
 ifeq ($(BR2_powerpc_SPE),y)
 ABI = spe

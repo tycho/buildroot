@@ -438,6 +438,11 @@ else
 LIB_SYMLINK = lib32
 endif
 
+# The x32 ABI is a special case
+ifeq ($(BR2_X32_ABI),y)
+LIB_SYMLINK = libx32
+endif
+
 $(STAGING_DIR):
 	@mkdir -p $(STAGING_DIR)/bin
 	@mkdir -p $(STAGING_DIR)/lib
