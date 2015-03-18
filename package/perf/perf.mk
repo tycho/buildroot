@@ -15,8 +15,14 @@ endif
 
 PERF_DEPENDENCIES = host-flex host-bison
 
+PERF_ARCH=$(KERNEL_ARCH)
+ifeq ($(KERNEL_ARCH),x86_64)
+PERF_ARCH=x86
+endif
+
 PERF_MAKE_FLAGS = \
 	$(LINUX_MAKE_FLAGS) \
+	ARCH=$(PERF_ARCH) \
 	NO_LIBAUDIT=1 \
 	NO_NEWT=1 \
 	NO_GTK2=1 \
