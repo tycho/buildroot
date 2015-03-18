@@ -40,12 +40,18 @@ define NET_TOOLS_BUILD_CMDS
 		LDFLAGS="$(NET_TOOLS_LDFLAGS)" $(MAKE) -C $(@D)
 endef
 
+ifneq ($(BR2_ROOTFS_SKELETON_UNIFIED_BIN),y)
+define NET_TOOLS_RELOCATE_SBIN_CMDS
+	mv -f $(TARGET_DIR)/bin/ifconfig $(TARGET_DIR)/sbin/ifconfig
+	mv -f $(TARGET_DIR)/bin/route $(TARGET_DIR)/sbin/route
+endef
+endif
+
 # install renames conflicting binaries, update does not
 # ifconfig & route reside in /sbin for busybox
 define NET_TOOLS_INSTALL_TARGET_CMDS
 	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(TARGET_DIR) update
-	mv -f $(TARGET_DIR)/bin/ifconfig $(TARGET_DIR)/sbin/ifconfig
-	mv -f $(TARGET_DIR)/bin/route $(TARGET_DIR)/sbin/route
+	$(NET_TOOLS_RELOCATE_SBIN_CMDS)
 endef
 
 $(eval $(generic-package))
