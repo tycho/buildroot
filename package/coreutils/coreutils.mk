@@ -99,18 +99,24 @@ COREUTILS_CONF_OPTS += --with-openssl=yes
 COREUTILS_DEPENDENCIES += openssl
 endif
 
+ifneq ($(BR2_ROOTFS_SKELETON_UNIFIED_BIN),y)
 define COREUTILS_POST_INSTALL
 	# some things go in root rather than usr
 	for f in $(COREUTILS_BIN_PROGS); do \
 		mv -f $(TARGET_DIR)/usr/bin/$$f $(TARGET_DIR)/bin/$$f || exit 1; \
 	done
-	# link for archaic shells
-	ln -fs test $(TARGET_DIR)/usr/bin/[
 	# gnu thinks chroot is in bin, debian thinks it's in sbin
 	mv -f $(TARGET_DIR)/usr/bin/chroot $(TARGET_DIR)/usr/sbin/chroot
 endef
 
 COREUTILS_POST_INSTALL_TARGET_HOOKS += COREUTILS_POST_INSTALL
+endif
+
+define COREUTILS_POST_INSTALL_TEST_SYMLINK
+	# link for archaic shells
+	ln -fs test $(TARGET_DIR)/usr/bin/[
+endef
+COREUTILS_POST_INSTALL_TARGET_HOOKS += COREUTILS_POST_INSTALL_TEST_SYMLINK
 
 # If both coreutils and busybox are selected, the corresponding applets
 # may need to be reinstated by the clean targets.
