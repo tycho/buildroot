@@ -1,0 +1,25 @@
+config BR2_PACKAGE_PACMAN
+	bool "pacman"
+	# bash and libgpgme dependencies
+	depends on BR2_USE_MMU
+	# libarchive dependency
+	depends on BR2_USE_WCHAR
+	# gnupg2 dependency
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_BASH
+	select BR2_PACKAGE_GNUPG2
+	select BR2_PACKAGE_LIBGPGME
+	select BR2_PACKAGE_LIBARCHIVE
+	select BR2_PACKAGE_LIBCURL
+	select BR2_PACKAGE_OPENSSL
+	help
+	  Pacman is the package manager used by the Arch distribution. It is a
+	  frontend for the ALPM (Arch Linux Package Management) library.
+
+	  Pacman does not strive to "do everything." It will add, remove and
+	  upgrade packages in the system, and it will allow you to query the
+	  package database for installed packages, files and owners. It also
+	  attempts to handle dependencies automatically and can download
+	  packages from a remote server. Arch packages are simple archives, with
+	  .pkg.tar.gz extension for binary packages and .src.tar.gz for source
+	  packages.
