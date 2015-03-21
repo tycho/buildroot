@@ -1,0 +1,95 @@
+Removes an unnecessary dependency on having C++ support in the toolchain. The
+only C++ code in dbus is for Windows only.
+
+Signed-off-by: Steven Noonan <steven@uplinklabs.net>
+
+diff --git a/configure.ac b/configure.ac
+index 0d0d5d5..a2b9e66 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -60,7 +60,6 @@ AC_SUBST(DBUS_VERSION)
+
+ AC_PROG_CC
+ AM_PROG_CC_C_O
+-AC_PROG_CXX
+ AC_USE_SYSTEM_EXTENSIONS
+ AC_ISC_POSIX
+ AC_HEADER_STDC
+@@ -1807,7 +1806,6 @@ echo "
+	compiler:		  ${CC}
+	cflags:		          ${CFLAGS}
+	cppflags:		  ${CPPFLAGS}
+-	cxxflags:		  ${CXXFLAGS}
+	64-bit int:		  ${DBUS_INT64_TYPE}
+	32-bit int:		  ${DBUS_INT32_TYPE}
+	16-bit int:		  ${DBUS_INT16_TYPE}
+diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+index b248107..4deb4b8 100644
+--- a/dbus/Makefile.am
++++ b/dbus/Makefile.am
+@@ -303,7 +303,6 @@ if DBUS_WIN
+ # even on Unix where in fact it doesn't contain any C++. For Windows, where
+ # this code is used, we don't actually need libstdc++.
+ noinst_LTLIBRARIES += libdbus-init-win.la
+-libdbus_init_win_la_SOURCES = dbus-init-win.cpp
+ libdbus_1_la_LIBADD += libdbus-init-win.la
+ libdbus_internal_la_LIBADD += libdbus-init-win.la
+ endif
+diff --git a/dbus/dbus-init-win.cpp b/dbus/dbus-init-win.cpp
+deleted file mode 100644
+index 687f248..0000000
+--- a/dbus/dbus-init-win.cpp
++++ /dev/null
+@@ -1,52 +0,0 @@
+-/*
+- * dbus-init-win.cpp - once-per-process initialization
+- *
+- * Copyright © 2013 Intel Corporation
+- *
+- * Licensed under the Academic Free License version 2.1
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 2 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+- *
+- */
+-
+-#include <config.h>
+-
+-extern "C"
+-{
+-#include "dbus-sysdeps-win.h"
+-}
+-
+-class DBusInternalInit
+-  {
+-    public:
+-      DBusInternalInit ()
+-        {
+-          _dbus_threads_windows_init_global ();
+-        }
+-
+-      void must_not_be_omitted ()
+-        {
+-        }
+-  };
+-
+-static DBusInternalInit init;
+-
+-extern "C" void
+-_dbus_threads_windows_ensure_ctor_linked ()
+-{
+-  /* Do nothing significant, just ensure that the global initializer gets
+-   * linked in. */
+-  init.must_not_be_omitted ();
+-}
