@@ -100,6 +100,11 @@ config BR2_PACKAGE_UTIL_LINUX_FDFORMAT
 	help
 	  Low-level format a floppy disk
 
+config BR2_PACKAGE_UTIL_LINUX_FINDMNT
+	bool "findmnt"
+	help
+	  Lists mounted filesystems or searches for a filesystem
+
 config BR2_PACKAGE_UTIL_LINUX_FSCK
 	bool "fsck"
 	help
