@@ -1339,6 +1339,7 @@ menu "Package managers"
 	source "package/pacman/Config.in"
 if BR2_PACKAGE_PACMAN
 	source "package/arch-install-scripts/Config.in"
+	source "package/archlinux-keyring/Config.in"
 endif
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 	source "package/rpm/Config.in"

@@ -1,0 +1,5 @@
+config BR2_PACKAGE_ARCHLINUX_KEYRING
+	bool "archlinux-keyring"
+	default y
+	help
+	  Arch Linux PGP keyring
