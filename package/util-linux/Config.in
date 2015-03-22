@@ -110,6 +110,11 @@ config BR2_PACKAGE_UTIL_LINUX_FSCK
 	help
 	  Check and repair a linux filesystem
 
+config BR2_PACKAGE_UTIL_LINUX_FSTRIM
+	bool "fstrim"
+	help
+	  Discard unused blocks on a mounted filesystem
+
 config BR2_PACKAGE_UTIL_LINUX_HWCLOCK
 	bool "hwclock"
 	help
