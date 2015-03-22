@@ -12,6 +12,9 @@ LIBGPGME_LICENSE_FILES = COPYING.LESSER
 LIBGPGME_INSTALL_STAGING = YES
 LIBGPGME_DEPENDENCIES = libassuan libgpg-error
 
+# We patch configure.ac and Makefile.am
+LIBGPGME_AUTORECONF = YES
+
 # libgpgme, needs to know the gpg binary path on the target.
 LIBGPGME_CONF_OPTS = --with-gpg=/usr/bin/gpg \
 	--with-gpg-error-prefix=$(STAGING_DIR)/usr \
