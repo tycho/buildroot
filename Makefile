@@ -347,7 +347,12 @@ HOST_DIR := $(call qstrip,$(BR2_HOST_DIR))
 # Quotes are needed for spaces and all in the original PATH content.
 BR_PATH = "$(HOST_DIR)/bin:$(HOST_DIR)/sbin:$(HOST_DIR)/usr/bin:$(HOST_DIR)/usr/sbin:$(PATH)"
 
+ifeq ($(BR2_ROOTFS_SKELETON_DEFAULT),y)
 TARGET_SKELETON = $(TOPDIR)/system/skeleton
+endif
+ifeq ($(BR2_ROOTFS_SKELETON_UNIFIED_BIN),y)
+TARGET_SKELETON = $(TOPDIR)/system/unified-bin
+endif
 
 # Location of a file giving a big fat warning that output/target
 # should not be used as the root filesystem.

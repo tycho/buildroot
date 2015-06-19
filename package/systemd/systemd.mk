@@ -27,8 +27,6 @@ SYSTEMD_DEPENDENCIES += busybox
 endif
 
 SYSTEMD_CONF_OPTS += \
-	--with-rootprefix= \
-	--with-rootlibdir=/lib \
 	--enable-static=no \
 	--disable-manpages \
 	--disable-selinux \
@@ -36,11 +34,20 @@ SYSTEMD_CONF_OPTS += \
 	--with-dbuspolicydir=/etc/dbus-1/system.d \
 	--with-dbussessionservicedir=/usr/share/dbus-1/services \
 	--with-dbussystemservicedir=/usr/share/dbus-1/system-services \
-	--enable-split-usr \
 	--disable-efi \
 	--disable-tests \
 	--disable-dbus \
 	--without-python
+
+ifeq ($(BR2_ROOTFS_SKELETON_UNIFIED_BIN),y)
+SYSTEMD_CONF_OPTS += \
+	--libexecdir=/usr/lib
+else
+SYSTEMD_CONF_OPTS += \
+	--enable-split-usr \
+	--with-rootprefix= \
+	--with-rootlibdir=/lib
+endif
 
 SYSTEMD_CFLAGS = $(TARGET_CFLAGS) -fno-lto
 
