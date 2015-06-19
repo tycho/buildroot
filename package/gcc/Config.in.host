@@ -90,6 +90,16 @@ choice
 
 endchoice
 
+if BR2_GCC_VERSION_4_8_X || BR2_GCC_VERSION_4_9_X
+
+config BR2_GCC_STABLE_SNAPSHOT
+	bool "use stable snapshot version"
+	depends on !BR2_arc
+	help
+	  Use the latest stable snapshot for this GCC version.
+
+endif
+
 config BR2_GCC_SUPPORTS_FINEGRAINEDMTUNE
 	bool
 	default y
@@ -98,7 +108,9 @@ config BR2_GCC_VERSION
 	string
 	default "4.5.4"     if BR2_GCC_VERSION_4_5_X
 	default "4.7.4"     if BR2_GCC_VERSION_4_7_X
+	default "4.8-20150611"	if BR2_GCC_VERSION_4_8_X && BR2_GCC_STABLE_SNAPSHOT
 	default "4.8.4"     if BR2_GCC_VERSION_4_8_X
+	default "4.9-20150617"	if BR2_GCC_VERSION_4_9_X && BR2_GCC_STABLE_SNAPSHOT
 	default "4.9.2"     if BR2_GCC_VERSION_4_9_X
 	default "5.1.0"     if BR2_GCC_VERSION_5_1_X
 	default "arc-2014.12" if BR2_GCC_VERSION_4_8_ARC

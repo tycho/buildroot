@@ -1,0 +1,5 @@
+config BR2_PACKAGE_ISL
+    bool "isl"
+	select BR2_PACKAGE_GMP
+	help
+	  Package isl for the target

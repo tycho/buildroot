@@ -53,6 +53,17 @@ define LINUX_HEADERS_INSTALL_STAGING_CMDS
 			headers_install)
 endef
 
+define LINUX_HEADERS_INSTALL_TARGET_CMDS
+	(cd $(@D); \
+		$(TARGET_MAKE_ENV) $(MAKE) \
+			ARCH=$(KERNEL_ARCH) \
+			HOSTCC="$(HOSTCC)" \
+			HOSTCFLAGS="$(HOSTCFLAGS)" \
+			HOSTCXX="$(HOSTCXX)" \
+			INSTALL_HDR_PATH=$(TARGET_DIR)/usr \
+			headers_install)
+endef
+
 ifeq ($(BR2_KERNEL_HEADERS_VERSION),y)
 define LINUX_HEADERS_CHECK_VERSION
 	$(call check_kernel_headers_version,\

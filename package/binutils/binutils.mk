@@ -70,6 +70,12 @@ BINUTILS_CONF_OPTS += \
 	--enable-threads
 endif
 
+ifeq ($(BR2_BINUTILS_ENABLE_LTO),y)
+BINUTILS_CONF_OPTS += \
+	--enable-plugins \
+	--enable-lto
+endif
+
 # Don't build documentation. It takes up extra space / build time,
 # and sometimes needs specific makeinfo versions to work
 BINUTILS_CONF_ENV += ac_cv_prog_MAKEINFO=missing

@@ -1,0 +1,5 @@
+config BR2_PACKAGE_CLOOG
+    bool "cloog"
+	select BR2_PACKAGE_ISL
+	help
+	  Package cloog for the target
