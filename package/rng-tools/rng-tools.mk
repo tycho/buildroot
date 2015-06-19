@@ -22,6 +22,8 @@ RNG_TOOLS_CONF_OPTS += --without-libgcrypt
 endif
 
 define RNG_TOOLS_INSTALL_INIT_SYSTEMD
+	$(INSTALL) -D -m 644 package/rng-tools/rngd.conf \
+		$(TARGET_DIR)/etc/conf.d/rngd
 	$(INSTALL) -D -m 644 package/rng-tools/rngd.service \
 		$(TARGET_DIR)/usr/lib/systemd/system/rngd.service
 	mkdir -p $(TARGET_DIR)/etc/systemd/system/multi-user.target.wants

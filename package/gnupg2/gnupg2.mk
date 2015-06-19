@@ -20,6 +20,11 @@ GNUPG2_CONF_OPTS = \
 	--with-pth-prefix=$(STAGING_DIR)/usr
 GNUPG2_CONF_ENV = gl_cv_header_working_stdint_h=yes
 
+define GNUPG2_SYMLINK_GPG
+	ln -s gpg2 $(TARGET_DIR)/usr/bin/gpg
+endef
+GNUPG2_POST_INSTALL_TARGET_HOOKS += GNUPG2_SYMLINK_GPG
+
 ifneq ($(BR2_PACKAGE_GNUPG2_GPGV2),y)
 define GNUPG2_REMOVE_GPGV2
 	rm -f $(TARGET_DIR)/usr/bin/gpgv2

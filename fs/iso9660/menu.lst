@@ -1,3 +1,5 @@
+serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+terminal --timeout=15 serial
 default		0
 timeout		10
 
@@ -12,7 +14,7 @@ foreground 	000000
 background 	cccccc
 
 title		Buildroot ISO9660 image
-kernel		__KERNEL_PATH__ root=/dev/sr0
+kernel		__KERNEL_PATH__ root=/dev/sr0 console=ttyS0,115200n8 loglevel=6
 initrd		__INITRD_PATH__
 
 title		Hard Drive (first partition)
