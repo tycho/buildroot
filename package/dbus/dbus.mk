@@ -10,6 +10,9 @@ DBUS_LICENSE = AFLv2.1 GPLv2+
 DBUS_LICENSE_FILES = COPYING
 DBUS_INSTALL_STAGING = YES
 
+# We patch configure.ac
+DBUS_AUTORECONF = YES
+
 define DBUS_PERMISSIONS
 	/usr/libexec/dbus-daemon-launch-helper f 4755 0 0 - - - - -
 endef

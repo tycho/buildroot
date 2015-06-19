@@ -14,7 +14,9 @@ ELFUTILS_PATCH = elfutils-portability-0.161.patch
 
 # The tarball does not have a generated configure script
 ELFUTILS_AUTORECONF = YES
-ELFUTILS_CONF_OPTS += --disable-werror
+ELFUTILS_CONF_OPTS += \
+	--disable-werror \
+	--program-prefix="eu-"
 
 # elfutils gets confused when lfs mode is forced, so don't
 ELFUTILS_CONF_ENV += \

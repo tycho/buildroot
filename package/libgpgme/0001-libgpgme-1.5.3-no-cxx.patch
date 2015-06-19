@@ -1,0 +1,50 @@
+gpgme depends on C++ toolchain support only on Windows. We're not building for
+Windows. Remove the frivilous dependency.
+
+Signed-off-by: Steven Noonan <steven@uplinklabs.net>
+
+diff --git a/configure.ac b/configure.ac
+index 70b846f..de0ccfd 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -98,7 +98,6 @@ AH_VERBATIM([_REENTRANT],
+ #endif])
+
+ AC_PROG_CC
+-AC_PROG_CXX
+
+ # Note: A suitable gitlog-to-changelog script can be found in GnuPG master.
+ AC_CHECK_PROGS(GITLOG_TO_CHANGELOG, gitlog-to-changelog, [gitlog-to-changelog])
+diff --git a/src/Makefile.am b/src/Makefile.am
+index b7ddbc1..2133a83 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -20,7 +20,7 @@
+
+ # Note: moc_kdpipeiodevice should actually be a dependecy below.
+ EXTRA_DIST = gpgme-config.in gpgme.m4 libgpgme.vers ChangeLog-2011 \
+-	     gpgme.h.in versioninfo.rc.in gpgme.def moc_kdpipeiodevice.cpp
++	     gpgme.h.in versioninfo.rc.in gpgme.def
+
+ bin_SCRIPTS = gpgme-config
+ m4datadir = $(datadir)/aclocal
+@@ -110,19 +110,6 @@ if BUILD_W32_GLIB
+ libgpgme_glib_la_SOURCES = $(main_sources) ath.h ath.c w32-glib-io.c
+ endif
+
+-if BUILD_W32_QT
+-libgpgme_qt_la_SOURCES = $(main_sources) ath.h ath.c w32-qt-io.cpp \
+-	kdpipeiodevice.h kdpipeiodevice.cpp kdpipeiodevice.moc
+-# FIXME: Add extra depedency: moc_kdpipeiodevice.cpp
+-
+-# These are built sources (normally).
+-# moc_kdpipeiodevice.cpp: kdpipeiodevice.h
+-#	$(MOC4) -o $@ $<
+-#
+-# kdpipeiodevice.moc: kdpipeiodevice.cpp
+-#	$(MOC4) -o $@ $<
+-endif
+-
+ # We use a global CFLAGS and CPPFLAGS setting for all library
+ # versions, because then every object file is only compiled once.
+ AM_CPPFLAGS = @GPG_ERROR_CFLAGS@ @QT4_CORE_CFLAGS@

@@ -1,0 +1,16 @@
+Eliminate an unnecessary dependency on a C++ toolchain.
+
+Signed-off-by: Steven Noonan <steven@uplinklabs.net>
+
+diff --git a/configure.ac b/configure.ac
+index 37472c3..6b4f56d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -29,7 +29,6 @@ AS_IF([test "x$ac_cv_prog_cc_c99" = "xno"], [
+         AC_MSG_ERROR([no C99 compiler found, $PACKAGE requires a C99 compiler.])
+ ])
+
+-AC_PROG_CXX
+ AC_PROG_CPP
+ AC_PROG_INSTALL
+ AC_PROG_LN_S

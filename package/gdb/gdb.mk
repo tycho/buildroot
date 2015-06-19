@@ -100,7 +100,7 @@ GDB_CONF_OPTS += --without-python
 endif
 
 ifeq ($(BR2_PACKAGE_EXPAT),y)
-GDB_CONF_OPTS += --with-expat
+GDB_CONF_OPTS += --with-expat -with-libexpat-prefix="$(STAGING_DIR)"
 GDB_DEPENDENCIES += expat
 else
 GDB_CONF_OPTS += --without-expat

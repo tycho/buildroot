@@ -6,6 +6,9 @@ config BR2_GCC_NEEDS_MPC
 config BR2_GCC_SUPPORTS_GRAPHITE
 	bool
 
+config BR2_TOOLCHAIN_HAS_SSP_STRONG
+	bool
+
 choice
 	prompt "GCC compiler Version"
 	default BR2_GCC_VERSION_4_8_ARC if BR2_arc
@@ -76,6 +79,7 @@ choice
 		# PR60102 https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60102
 		select BR2_GCC_NEEDS_MPC
 		select BR2_GCC_SUPPORTS_GRAPHITE
+		select BR2_TOOLCHAIN_HAS_SSP_STRONG
 
 	config BR2_GCC_VERSION_5_1_X
 		bool "gcc 5.1.x"

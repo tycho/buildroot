@@ -19,7 +19,7 @@ GRUB_LICENSE_FILES = COPYING
 # to avoid undefined references to __stack_chk_fail.
 GRUB_CFLAGS = \
 	-DSUPPORT_LOOPDEV \
-	-O0 -Wl,--build-id=none \
+	-O0 -fuse-ld=bfd -Wl,--build-id=none \
 	-fno-stack-protector
 
 GRUB_CONFIG-y += $(if $(BR2_TARGET_GRUB_SPLASH),--enable-graphics,--disable-graphics)

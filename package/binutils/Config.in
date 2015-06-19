@@ -1,7 +1,7 @@
 config BR2_PACKAGE_BINUTILS
 	bool "binutils"
 	select BR2_PACKAGE_GETTEXT if BR2_NEEDS_GETTEXT_IF_LOCALE
-	depends on !BR2_aarch64 && !BR2_nios2
+	depends on !BR2_nios2
 	depends on BR2_USE_WCHAR
 	help
 	  Install binutils on the target
@@ -18,6 +18,25 @@ config BR2_PACKAGE_BINUTILS_TARGET
 	  and others...
 
 	  http://www.gnu.org/software/binutils/
+
+config BR2_PACKAGE_BINUTILS_LD_GOLD
+	bool "enable gold linker"
+	help
+	  Enables the ld.gold linker.
+
+if BR2_PACKAGE_BINUTILS_LD_GOLD
+
+config BR2_PACKAGE_BINUTILS_LD_GOLD_THREADS
+	bool "enable multithreaded ld.gold"
+	help
+	  Enables multithreading in ld.gold
+
+config BR2_PACKAGE_BINUTILS_LD_GOLD_DEFAULT
+	bool "make gold linker the default"
+	help
+	  Makes the gold linker the default linker.
+
+endif
 
 endif
 

@@ -1,0 +1,16 @@
+Removes a totally unnecessary dependency on having a C++ toolchain.
+
+Signed-off-by: Steven Noonan <steven@uplinklabs.net>
+
+diff --git a/configure.in b/configure.in
+index 7e968c4..7f7380d 100644
+--- a/configure.in
++++ b/configure.in
+@@ -62,7 +62,6 @@ AC_SUBST(LIBAGE)
+
+ dnl Checks for programs.
+ AC_PROG_CC
+-AC_PROG_CXX
+ AC_PROG_INSTALL
+
+ if test "$GCC" = yes ; then

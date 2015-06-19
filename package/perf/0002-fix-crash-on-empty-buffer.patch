@@ -1,0 +1,11 @@
+--- a/tools/perf/ui/browsers/hists.c
++++ b/tools/perf/ui/browsers/hists.c
+@@ -1059,7 +1059,7 @@ do_offset:
+			}
+			first = false;
+		}
+-	} else {
++	} else if (nd) {
+		browser->top = nd;
+		h = rb_entry(nd, struct hist_entry, rb_node);
+		h->row_offset = 0;
