@@ -1,0 +1,10 @@
+config BR2_PACKAGE_SHADOW
+	bool "shadow"
+	select BR2_PACKAGE_ACL
+	select BR2_PACKAGE_LINUX_PAM
+	select BR2_PACKAGE_UTIL_LINUX
+	help
+	  Password and account management tool suite with support for shadow files
+	  and PAM
+
+	  http://pkg-shadow.alioth.debian.org/

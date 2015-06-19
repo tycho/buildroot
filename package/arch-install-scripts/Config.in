@@ -1,0 +1,11 @@
+config BR2_PACKAGE_ARCH_INSTALL_SCRIPTS
+	bool "arch-install-scripts"
+	# util-linux dependencies
+	depends on BR2_LARGEFILE
+	# bash dependencies
+	depends on BR2_USE_MMU
+	select BR2_PACKAGE_BASH
+	select BR2_PACKAGE_UTIL_LINUX
+	help
+	  This is a small suite of scripts aimed at automating some menial
+	  tasks when installing Arch Linux.

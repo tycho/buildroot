@@ -1224,6 +1224,7 @@ endif
 	source "package/modem-manager/Config.in"
 	source "package/mongoose/Config.in"
 	source "package/mongrel2/Config.in"
+	source "package/mosh/Config.in"
 	source "package/mosquitto/Config.in"
 	source "package/mrouted/Config.in"
 	source "package/mtr/Config.in"
@@ -1335,6 +1336,11 @@ endmenu
 menu "Package managers"
 	source "package/ipkg/Config.in"
 	source "package/opkg/Config.in"
+	source "package/pacman/Config.in"
+if BR2_PACKAGE_PACMAN
+	source "package/arch-install-scripts/Config.in"
+	source "package/archlinux-keyring/Config.in"
+endif
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 	source "package/rpm/Config.in"
 endif
@@ -1420,6 +1426,7 @@ endif
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 	source "package/rsyslog/Config.in"
 endif
+	source "package/shadow/Config.in"
 	source "package/smack/Config.in"
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 	source "package/start-stop-daemon/Config.in"

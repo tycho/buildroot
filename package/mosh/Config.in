@@ -1,0 +1,15 @@
+config BR2_PACKAGE_MOSH
+	bool "mosh"
+	select BR2_PACKAGE_OPENSSH
+	select BR2_PACKAGE_PERL
+	select BR2_PACKAGE_PROTOBUF
+	select BR2_PACKAGE_NCURSES
+	select BR2_PACKAGE_PERL
+	select BR2_PACKAGE_ZLIB
+	help
+	  Remote terminal application that allows roaming, supports intermittent
+	  connectivity, and provides intelligent local echo and line editing of
+	  user keystrokes.
+
+	  Mosh is a replacement for SSH. It's more robust and responsive,
+	  especially over Wi-Fi, cellular, and long-distance links.
