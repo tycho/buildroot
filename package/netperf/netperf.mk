@@ -6,7 +6,7 @@
 
 NETPERF_VERSION = 2.6.0
 NETPERF_SITE = ftp://ftp.netperf.org/netperf
-NETPERF_CONF_ENV = ac_cv_func_setpgrp_void=set
+NETPERF_CONF_ENV = ac_cv_func_setpgrp_void=set CFLAGS="$(TARGET_CFLAGS) -std=gnu89"
 NETPERF_CONF_OPTS = --enable-demo=yes
 NETPERF_LICENSE = netperf license
 NETPERF_LICENSE_FILES = COPYING
