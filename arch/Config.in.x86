@@ -198,6 +198,37 @@ config BR2_x86_winchip2
 	depends on !BR2_x86_64
 endchoice
 
+choice
+	prompt "Target ABI"
+	depends on BR2_x86_64
+	default BR2_X86_64_ABI
+	help
+	  Application Binary Interface to use. The Application Binary
+	  Interface describes the calling conventions (how arguments
+	  are passed to functions, how the return value is passed, how
+	  system calls are made, etc.).
+
+config BR2_X86_64_ABI
+	bool "x86_64"
+	help
+	  This is the standard and most well-tested ABI for the x86_64
+	  architecture. This is the recommended choice.
+
+config BR2_X32_ABI
+	bool "x32"
+	help
+	  The x32 ABI allows programs to take advantage of the benefits of x86_64
+	  (larger number of CPU registers, better floating-point performance,
+	  faster position-independent code shared libraries, function parameters
+	  passed via registers, faster syscall instruction) while using 32-bit
+	  pointers and thus avoiding the overhead of 64-bit pointers.
+
+	  This is not as well-tested as the x86_64 ABI. If you run into problems
+	  using this option, please submit patches to the mailing list.
+
+endchoice
+
+
 config BR2_ARCH
 	default "i386"		if BR2_x86_i386
 	default "i486"		if BR2_x86_i486
@@ -268,3 +299,7 @@ config BR2_GCC_TARGET_ARCH
 	default "c3"		if BR2_x86_c3
 	default "c3-2"		if BR2_x86_c32
 	default "geode"		if BR2_x86_geode
+
+config BR2_GCC_TARGET_ABI
+	default "mx32"		if BR2_X32_ABI
+	default "m64"		if BR2_x86_64

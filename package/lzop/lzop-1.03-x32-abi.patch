@@ -1,0 +1,17 @@
+diff --git a/src/miniacc.h b/src/miniacc.h
+index 9170c23..8e7762d 100644
+--- a/src/miniacc.h
++++ b/src/miniacc.h
+@@ -6787,7 +6787,11 @@ ACCLIB_PUBLIC_NOINLINE(void, acc_debug_nop) (void)
+ ACCLIB_PUBLIC_NOINLINE(int, acc_debug_align_check_query) (void)
+ {
+ #if (ACC_ARCH_AMD64 || ACC_ARCH_I386) && (ACC_ASM_SYNTAX_GNUC)
+-    size_t r;
++#if ACC_ARCH_AMD64
++    acc_ullong_t r;
++#else
++    unsigned long r;
++#endif
+     __asm__ __volatile__("pushf\n pop %0\n" : "=a" (r) : : __ACC_ASM_CLOBBER);
+     return (int)(r >> 18) & 1;
+ #elif (ACC_ARCH_I386) && (ACC_ASM_SYNTAX_MSC)

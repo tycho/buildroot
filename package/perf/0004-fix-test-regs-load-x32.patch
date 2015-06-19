@@ -1,0 +1,13 @@
+diff --git a/tools/perf/arch/x86/tests/regs_load.S b/tools/perf/arch/x86/tests/regs_load.S
+index 60875d5..33d0a48 100644
+--- a/tools/perf/arch/x86/tests/regs_load.S
++++ b/tools/perf/arch/x86/tests/regs_load.S
+@@ -26,7 +26,7 @@
+ #define R15	23 * 8
+
+ .text
+-#ifdef HAVE_ARCH_X86_64_SUPPORT
++#if defined(HAVE_ARCH_X86_64_SUPPORT) || (defined(__x86_64__) && defined(__ILP32__))
+ ENTRY(perf_regs_load)
+	movq %rax, AX(%rdi)
+	movq %rbx, BX(%rdi)

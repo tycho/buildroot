@@ -24,7 +24,7 @@ choice
 	prompt "C library"
 	default BR2_TOOLCHAIN_UCLIBC
 	default BR2_TOOLCHAIN_BUILDROOT_GLIBC if BR2_aarch64 || BR2_microblaze \
-		|| BR2_mips64 || BR2_mips64el || BR2_powerpc64
+		|| BR2_mips64 || BR2_mips64el || BR2_powerpc64 || BR2_X32_ABI
 
 config BR2_TOOLCHAIN_BUILDROOT_UCLIBC
 	bool "uClibc"
@@ -34,6 +34,7 @@ config BR2_TOOLCHAIN_BUILDROOT_UCLIBC
 		   BR2_mips    || BR2_mipsel || BR2_mips64 || BR2_mips64el || \
 		   BR2_powerpc || BR2_sh2a   || BR2_sh4	   || BR2_sh4eb    || \
 		   BR2_sparc   || BR2_xtensa || BR2_x86_64
+	depends on !BR2_X32_ABI
 	help
 	  This option selects uClibc as the C library for the
 	  cross-compilation toolchain.
